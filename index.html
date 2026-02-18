@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hieroglyphics — 360 Tour 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C8A84B;
+            --gold-light: #F0C96A;
+            --gold-dim: #7A6228;
+            --black: #080707;
+            --dark: #0F0D0A;
+            --mid: #1A1710;
+            --text: #E8DEC8;
+            --muted: #7A7060;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--black);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.4;
+        }
+
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 20%, rgba(200,168,75,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 80%, rgba(200,168,75,0.05) 0%, transparent 60%),
+                linear-gradient(180deg, #0a0800 0%, var(--black) 100%);
+        }
+
+        .hiero-logo {
+            position: absolute;
+            top: 6%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(200px, 40vw);
+            opacity: 0.25;
+            animation: pulse 6s ease-in-out infinite;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.25; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.35; transform: translateX(-50%) scale(1.03); }
+        }
+
+        .hiero-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+        }
+
+        .hiero-strip-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.5rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: rgba(200,168,75,0.12);
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            padding: 0.3rem 0.7rem;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .live-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: blink 1.2s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(5rem, 18vw, 16rem);
+            line-height: 0.85;
+            color: var(--text);
+            letter-spacing: 0.02em;
+            animation: fadeUp 0.8s 0.15s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-title span {
+            display: block;
+            color: var(--gold);
+            -webkit-text-stroke: 1px var(--gold);
+            text-shadow: 0 0 80px rgba(200,168,75,0.3);
+        }
+
+        .hero-sub {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.6rem, 1.5vw, 0.85rem);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 1.5rem;
+            animation: fadeUp 0.8s 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-members {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            animation: fadeUp 0.8s 0.45s ease forwards;
+            opacity: 0;
+        }
+
+        .member-tag {
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.8rem;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            background: rgba(200,168,75,0.05);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            right: 3rem;
+            z-index: 2;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: fadeIn 1.5s 1s ease forwards;
+            opacity: 0;
+        }
+
+        .scroll-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold-dim), transparent);
+            animation: lineExpand 2s 1.2s ease forwards;
+            transform-origin: right;
+            transform: scaleX(0);
+        }
+
+        @keyframes lineExpand {
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .ticker-wrap {
+            background: var(--gold);
+            overflow: hidden;
+            padding: 0.7rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .ticker {
+            display: flex;
+            gap: 0;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+
+        .ticker-item {
+            flex-shrink: 0;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            color: var(--black);
+            letter-spacing: 0.1em;
+            padding: 0 2rem;
+        }
+
+        .ticker-logo {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 0.5rem;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        section {
+            padding: 5rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold-dim), transparent);
+        }
+
+        .countdown-section {
+            max-width: 100%;
+            background: var(--mid);
+            border-top: 1px solid var(--gold-dim);
+            border-bottom: 1px solid var(--gold-dim);
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .countdown-target {
+            font-family: 'DM Serif Display', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: clamp(1rem, 4vw, 4rem);
+            flex-wrap: wrap;
+        }
+
+        .count-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .count-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            line-height: 1;
+            color: var(--gold);
+            text-shadow: 0 0 40px rgba(200,168,75,0.3);
+            min-width: 2ch;
+            transition: all 0.3s ease;
+        }
+
+        .count-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .count-sep {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            color: var(--gold-dim);
+            align-self: flex-start;
+            padding-top: 0.1em;
+            line-height: 1;
+        }
+
+        .dates-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .date-row {
+            display: grid;
+            grid-template-columns: 80px 1fr auto auto;
+            gap: 1.5rem;
+            align-items: center;
+            padding: 1.4rem 0;
+            border-bottom: 1px solid rgba(200,168,75,0.1);
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .date-row:first-child { border-top: 1px solid rgba(200,168,75,0.1); }
+
+        .date-row::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            right: -3rem;
+            top: 0;
+            bottom: 0;
+            background: rgba(200,168,75,0.03);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .date-row:hover::before { opacity: 1; }
+        .date-row:hover .date-num { color: var(--gold-light); }
+
+        .date-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .date-month {
+            font-size: 0.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-top: 0.1rem;
+        }
+
+        .date-info { min-width: 0; }
+
+        .date-venue {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .date-city {
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        .date-time {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .ticket-btn {
+            display: inline-block;
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .ticket-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .member-card {
+            border: 1px solid rgba(200,168,75,0.15);
+            padding: 1.5rem;
+            background: var(--mid);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover::before { transform: scaleX(1); }
+        .member-card:hover { border-color: rgba(200,168,75,0.4); }
+
+        .member-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
+            color: var(--text);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            font-size: 0.55rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+
+        footer {
+            max-width: 100%;
+            background: var(--mid);
+            border-top: 1px solid var(--gold-dim);
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .footer-logo-img {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.6;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .footer-note {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            color: var(--muted);
+        }
+
+        @media (max-width: 700px) {
+            header { padding: 2rem; }
+            section { padding: 4rem 1.5rem; }
+
+            .date-row {
+                grid-template-columns: 60px 1fr;
+                grid-template-rows: auto auto;
+                gap: 0.5rem 1rem;
+            }
+
+            .date-num { font-size: 2rem; }
+            .date-time { display: none; }
+            .ticket-btn { grid-column: 2; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="hero-bg"></div>
+    <div class="hiero-strip"></div>
+    <img src="hiero-logo.png" class="hiero-logo" alt="Hieroglyphics">
+    <div class="hero-content">
+        <div class="live-badge">
+            <span class="live-dot"></span>
+            Live Tour Info — Updated Daily
+        </div>
+        <div class="hero-eyebrow">Oakland, California — Est. 1991</div>
+        <h1 class="hero-title">HIERO<span>360</span></h1>
+        <p class="hero-sub">The circle is complete.</p>
+        <div class="hero-members">
+            <span class="member-tag">Del the Funky Homosapien</span>
+            <span class="member-tag">Souls of Mischief</span>
+            <span class="member-tag">Casual</span>
+            <span class="member-tag">Pep Love</span>
+            <span class="member-tag">Domino</span>
+            <span class="member-tag">DJ Toure</span>
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <span class="scroll-line"></span>
+        Scroll for Dates
+    </div>
+    <div class="hiero-strip-bottom"></div>
+</header>
+<div class="ticker-wrap">
+    <div class="ticker">
+        <span class="ticker-item">Hieroglyphics 360 Tour 2026</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Oakland Legends on the Road</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Del The Funky Homosapien</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Souls of Mischief</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Casual · Pep Love · Domino</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">DJ Toure</span>
+        <span class="ticker-item">Hieroglyphics 360 Tour 2026</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Oakland Legends on the Road</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Del The Funky Homosapien</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Souls of Mischief</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">Casual · Pep Love · Domino</span>
+        <img src="hiero-logo.png" class="ticker-logo">
+        <span class="ticker-item">DJ Toure</span>
+    </div>
+</div>
+<div class="countdown-section">
+    <div class="countdown-label">🗓 Countdown to Tour Kickoff</div>
+    <div class="countdown-target" id="countdown-target-label">Counting down to first show...</div>
+    <div class="countdown-grid">
+        <div class="count-unit"><div class="count-number" id="cd-days">00</div><div class="count-label">Days</div></div>
+        <div class="count-sep">:</div>
+        <div class="count-unit"><div class="count-number" id="cd-hours">00</div><div class="count-label">Hours</div></div>
+        <div class="count-sep">:</div>
+        <div class="count-unit"><div class="count-number" id="cd-mins">00</div><div class="count-label">Minutes</div></div>
+        <div class="count-sep">:</div>
+        <div class="count-unit"><div class="count-number" id="cd-secs">00</div><div class="count-label">Seconds</div></div>
+    </div>
+</div>
+<section id="dates">
+    <div class="section-label">📍 Tour Dates — Spring 2026</div>
+    <div class="dates-grid">
+        <div class="date-row"><div><div class="date-num">12</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Amsterdam Bar and Hall</div><div class="date-city">Saint Paul, MN</div></div><div class="date-time">8:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">13</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">The Pabst Theater</div><div class="date-city">Milwaukee, WI</div></div><div class="date-time">8:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">14</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Thalia Hall</div><div class="date-city">Chicago, IL</div></div><div class="date-time">8:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">15</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">El Club</div><div class="date-city">Detroit, MI — All Ages</div></div><div class="date-time">7:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">17</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Overflow Brewing Co.</div><div class="date-city">Ottawa, ON, Canada</div></div><div class="date-time">7:30 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">18</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">The Opera House</div><div class="date-city">Toronto, ON, Canada</div></div><div class="date-time">7:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">19</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Le Studio TD</div><div class="date-city">Montréal, QC, Canada</div></div><div class="date-time">8:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">20</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Brighton Music Hall</div><div class="date-city">Boston, MA — 18+ Event</div></div><div class="date-time">7:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">21</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Sony Hall</div><div class="date-city">New York, NY</div></div><div class="date-time">8:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">22</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Brooklyn Bowl Philadelphia</div><div class="date-city">Philadelphia, PA — All Ages</div></div><div class="date-time">8:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+        <div class="date-row"><div><div class="date-num">24</div><div class="date-month">Mar 2026</div></div><div class="date-info"><div class="date-venue">Union Stage</div><div class="date-city">Washington, DC</div></div><div class="date-time">8:00 PM</div><a class="ticket-btn" href="#" target="_blank">Tickets →</a></div>
+    </div>
+</section>
+<section id="crew">
+    <div class="section-label">👥 The Crew</div>
+    <div class="members-grid">
+        <div class="member-card"><span class="member-name">Del tha Funkee Homosapien</span><span class="member-role">MC · Producer · Founder</span></div>
+        <div class="member-card"><span class="member-name">A-Plus</span><span class="member-role">MC · Producer · Souls of Mischief</span></div>
+        <div class="member-card"><span class="member-name">Opio</span><span class="member-role">MC · Producer · Souls of Mischief</span></div>
+        <div class="member-card"><span class="member-name">Phesto</span><span class="member-role">MC · Producer · Souls of Mischief</span></div>
+        <div class="member-card"><span class="member-name">Tajai</span><span class="member-role">MC · Souls of Mischief</span></div>
+        <div class="member-card"><span class="member-name">Casual</span><span class="member-role">MC · Producer</span></div>
+        <div class="member-card"><span class="member-name">Pep Love</span><span class="member-role">MC · Producer</span></div>
+        <div class="member-card"><span class="member-name">Domino</span><span class="member-role">Producer</span></div>
+        <div class="member-card"><span class="member-name">DJ Toure</span><span class="member-role">DJ · Producer</span></div>
+    </div>
+</section>
+<footer>
+    <img src="hiero-logo.png" alt="Hieroglyphics Logo" class="footer-logo-img">
+    <p class="footer-note">All dates & times current as of Feb 2026.<br>Verify with venues for latest info.</p>
+</footer>
+<script>
+const shows=[{date:new Date('2026-03-12T20:00:00'),label:'Saint Paul, MN — Amsterdam Bar and Hall'},{date:new Date('2026-03-13T20:00:00'),label:'Milwaukee, WI — The Pabst Theater'},{date:new Date('2026-03-14T20:00:00'),label:'Chicago, IL — Thalia Hall'},{date:new Date('2026-03-15T19:00:00'),label:'Detroit, MI — El Club'},{date:new Date('2026-03-17T19:30:00'),label:'Ottawa, ON — Overflow Brewing Co.'},{date:new Date('2026-03-18T19:00:00'),label:'Toronto, ON — The Opera House'},{date:new Date('2026-03-19T20:00:00'),label:'Montréal, QC — Le Studio TD'},{date:new Date('2026-03-20T19:00:00'),label:'Boston, MA — Brighton Music Hall'},{date:new Date('2026-03-21T20:00:00'),label:'New York, NY — Sony Hall'},{date:new Date('2026-03-22T20:00:00'),label:'Philadelphia, PA — Brooklyn Bowl'},{date:new Date('2026-03-24T20:00:00'),label:'Washington, DC — Union Stage'}];
+function getNextShow(){const now=new Date();return shows.find(s=>s.date>now)||null}
+function pad(n){return String(n).padStart(2,'0')}
+function updateCountdown(){const next=getNextShow();const label=document.getElementById('countdown-target-label');if(!next){label.textContent='The 360 Tour has concluded. Stay tuned for more dates.';['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>{document.getElementById(id).textContent='00'});return}const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const d=next.date;label.textContent=`Next: ${months[d.getMonth()]} ${d.getDate()} — ${next.label}`;const diff=next.date-new Date();if(diff<=0){updateCountdown();return}const days=Math.floor(diff/86400000);const hours=Math.floor((diff%86400000)/3600000);const mins=Math.floor((diff%3600000)/60000);const secs=Math.floor((diff%60000)/1000);document.getElementById('cd-days').textContent=pad(days);document.getElementById('cd-hours').textContent=pad(hours);document.getElementById('cd-mins').textContent=pad(mins);document.getElementById('cd-secs').textContent=pad(secs)}
+updateCountdown();setInterval(updateCountdown,1000);
+function markPastDates(){const now=new Date();const rows=document.querySelectorAll('.date-row');rows.forEach((row,i)=>{if(shows[i]&&shows[i].date<now){row.style.opacity='0.4';const btn=row.querySelector('.ticket-btn');if(btn)btn.textContent='Past Show'}})}
+markPastDates();
+</script>
+</body>
+</html>
